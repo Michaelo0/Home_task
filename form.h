@@ -26,7 +26,6 @@ private slots:
 private:
     Ui::Form *ui;
     QHash<QString,QString> hash;
-    QHash<QString,QString>::iterator it=hash.begin();
     void loadTextFile();
 
 };

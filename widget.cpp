@@ -9,11 +9,27 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     QFile file(":/masterpassword.txt");
-    file.open(QIODevice::ReadOnly);
-    QTextStream in(&file);
+    file.open(QIODevice::ReadOnly|QIODevice::Append);
+    if(file.pos()==0)
+    {
+        ui->label->setDisabled(true);
+        ui->lineEdit->setDisabled(true);
+        ui->pushButton->setDisabled(true);
+        QMessageBox::information(this,QString::fromStdString("Добро пожаловать!"),QString::fromStdString("Создайте пароль"));
 
+    }
+    else
+    {
+        ui->label_2->setDisabled(true);
+        ui->label_3->setDisabled(true);
+        ui->label_4->setDisabled(true);
+        ui->lineEdit_2->setDisabled(true);
+        ui->lineEdit_3->setDisabled(true);
+        ui->pushButton_2->setDisabled(true);
+    }
+    QTextStream in(&file);
     password = in.readAll();
-qDebug()<<password;
+    qDebug()<<password;
     file.close();
 
 }
@@ -38,12 +54,13 @@ void Widget::on_pushButton_clicked()
 
 void Widget::on_pushButton_2_clicked()
 {
-    QFile file(":/masterpassword.txt");
-    file.open(QIODevice::WriteOnly);
-    QTextStream stream(&file);
     QString s=ui->lineEdit_2->text();
     QString s2=ui->lineEdit_3->text();
 
+
+    QFile file(":/masterpassword.txt");
+    file.open(QIODevice::WriteOnly);
+    QTextStream stream(&file);
     if(s==s2)
     {
 

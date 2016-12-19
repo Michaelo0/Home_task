@@ -20,40 +20,18 @@ Form::~Form()
 void Form::loadTextFile()
 {
 
-    QFile pFile(":/passwords.txt");
-    pFile.open(QIODevice::ReadOnly);
-    QTextStream in(&pFile);
-    QString line = in.readAll();
-    while (!in.atEnd())
-    {
+    QFile file(":/passwords.txt");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString raw_data = in.readAll();
+       QStringList pwd_lines = raw_data.split(QRegExp("\n|/r/n"), QString::SkipEmptyParts);
+       foreach(QString raw_line, pwd_lines)
+         {
+             QStringList line = raw_line.split(" ", QString::SkipEmptyParts);
+             passwords_info.insert(line[0], line[1]);
+         }
 
-        QString str=in.readLine();
 
-        char* ptr=NULL;
-
-        ptr=strtok(str.toLocal8Bit().data()," ");
-        QString s,s2;
-        int i=0;
-        while (ptr)
-        {
-            i++;
-
-            if (i<=1)
-                s=ptr;
-            else
-                s2=ptr;
-        }
-        hash.insert(s,s2);
-
-}
-//QHash<QString,QString>::iterator it;
-//for(it=hash.begin();it=hash.end();++it)
-//{
-//    ui->listWidget->addItem(it.key()+" "+it.value());
-//}
-ui->textEdit->setPlainText(line);
-QTextCursor cursor = ui->textEdit->textCursor();
-cursor.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor, 1);
 }
 
 void Form::on_pushButton_clicked()
@@ -62,32 +40,24 @@ void Form::on_pushButton_clicked()
 
     QFile  file(":/passwords.txt");
 
-        QTextStream stream(&file);
+        QTextStream out(&file);
 
 file.open(QIODevice::QIODevice::WriteOnly);
     QString s=ui->lineEdit->text();
     QString s2=ui->lineEdit_2->text();
     hash.insert(s,s2);
+QHashIterator<QString,QString>i(hash);
+        while(i.hasNext())
+        {
+            i.next();
+            out<<i.value()<<" "<<i.key()<<endl;
 
-
-
-//        for(it=hash.begin();it=hash.end();++it)
-//        {
-//            stream<< s + " " + s2 + "\n" ;
-//        }
-
-
-
-
-    while (!stream.atEnd())
-    {
-        qDebug()<<stream.readLine();
-    }
-
+        }
     ui->lineEdit->clear();
     ui->lineEdit_2->clear();
     ui->listWidget->addItem(s);
-file.close
-        ();
+file.flush();
+file.close();
+
 }
 
