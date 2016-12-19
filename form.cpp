@@ -1,5 +1,6 @@
 #include "form.h"
 #include "ui_form.h"
+#include <QModelIndex>
 
 Form::Form(QWidget *parent) :
     QWidget(parent),
@@ -28,7 +29,7 @@ void Form::loadPwdFromFile()
          {
              QStringList line = raw_line.split(" ", QString::SkipEmptyParts);
              passwords_info.insert(line[0], line[1]);
-             ui->listWidget->addItem(line[0]);
+             ui->listWidget->addItem(line[0]+":"+line[1]);
          }
     }
     file.close();
@@ -54,9 +55,16 @@ QHashIterator<QString,QString>i(passwords_info);
         }
     ui->lineEdit->clear();
     ui->lineEdit_2->clear();
-    ui->listWidget->addItem(s);
+    ui->listWidget->addItem(s+":"+s2);
 file.flush();
 file.close();
 
 }
 
+
+
+//void Form::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+//{
+//    const QString& str=ui->listWidget->currentItem()->text();
+//    ui->label_5->setText(passwords_info[str]);
+//}

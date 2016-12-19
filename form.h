@@ -17,7 +17,7 @@ class Form : public QWidget
 
 public:
     explicit Form(QWidget *parent = 0);
-     void loadPwdFromFile();
+
 
     ~Form();
 
@@ -25,10 +25,13 @@ private slots:
     void on_pushButton_clicked();
 
 
+
+    //void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::Form *ui;
     QHash<QString, QString> passwords_info;
-
+void loadPwdFromFile();
 
 };
 
