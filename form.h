@@ -26,7 +26,7 @@ private slots:
 private:
     Ui::Form *ui;
    QHash<QString, QString> passwords_info;
-    void loadTextFile();
+    void loadPwdFromFile();
 
 };
 
