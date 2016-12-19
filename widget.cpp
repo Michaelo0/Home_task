@@ -8,9 +8,11 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    QFile file(":/masterpassword.txt");
-    file.open(QIODevice::ReadOnly|QIODevice::Append);
-    if(file.pos()==0)
+    QFile file("masterpassword.txt");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString str=in.readAll();
+    if(str.length()==0)
     {
         ui->label->setDisabled(true);
         ui->lineEdit->setDisabled(true);
@@ -27,16 +29,15 @@ Widget::Widget(QWidget *parent) :
         ui->lineEdit_3->setDisabled(true);
         ui->pushButton_2->setDisabled(true);
     }
-    QTextStream in(&file);
     password = in.readAll();
     qDebug()<<password;
-    file.close();
 
 }
 
 Widget::~Widget()
 {
     delete ui;
+
 }
 
 void Widget::on_pushButton_clicked()
@@ -58,8 +59,8 @@ void Widget::on_pushButton_2_clicked()
     QString s2=ui->lineEdit_3->text();
 
 
-    QFile file(":/masterpassword.txt");
-    file.open(QIODevice::WriteOnly);
+    QFile file("masterpassword.txt");
+   if(file.open(QIODevice::WriteOnly)){
     QTextStream stream(&file);
     if(s==s2)
     {
@@ -74,7 +75,10 @@ void Widget::on_pushButton_2_clicked()
 QMessageBox::critical(this,QString::fromStdString("Ошибка"),QString::fromStdString("Пароли не совпадают"));
     ui->lineEdit_2->clear();
     ui->lineEdit_3->clear();
+}
+    file.flush();
     file.close();
+
 }
 
 

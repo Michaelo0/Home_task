@@ -6,7 +6,7 @@ Form::Form(QWidget *parent) :
     ui(new Ui::Form)
 {
     ui->setupUi(this);
-    loadTextFile();
+    loadPwdFromFile();
 
 
 }
@@ -20,8 +20,8 @@ Form::~Form()
 void Form::loadPwdFromFile()
 {
     QHash<QString, QString> passwords_info;
-    QFile file(":/passwords.txt");
-    file.open(QIODevice::ReadOnly);
+    QFile file("passwords.txt");
+    if(file.open(QIODevice::ReadOnly)){
     QTextStream in(&file);
     QString raw_data = in.readAll();
        QStringList pwd_lines = raw_data.split(QRegExp("\n|/r/n"), QString::SkipEmptyParts);
@@ -30,6 +30,8 @@ void Form::loadPwdFromFile()
              QStringList line = raw_line.split(" ", QString::SkipEmptyParts);
              passwords_info.insert(line[0], line[1]);
          }
+    }
+
        file.flush();
        file.close();
 
@@ -38,15 +40,15 @@ void Form::loadPwdFromFile()
 void Form::on_pushButton_clicked()
 {
 
-
+    QString s=ui->lineEdit->text();
+    QString s2=ui->lineEdit_2->text();
+    passwords_info.insert(s,s2);
     QFile  file(":/passwords.txt");
 
         QTextStream out(&file);
 
-file.open(QIODevice::QIODevice::WriteOnly);
-    QString s=ui->lineEdit->text();
-    QString s2=ui->lineEdit_2->text();
-    passwords_info.insert(s,s2);
+file.open(QIODevice::WriteOnly|QFile::Text);
+
 QHashIterator<QString,QString>i(passwords_info);
         while(i.hasNext())
         {
