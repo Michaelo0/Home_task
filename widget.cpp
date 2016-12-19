@@ -10,6 +10,7 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     QFile file("masterpassword.txt");
     file.open(QIODevice::ReadOnly);
+
     QTextStream in(&file);
     QString str=in.readAll();
     if(str.length()==0)
@@ -29,7 +30,7 @@ Widget::Widget(QWidget *parent) :
         ui->lineEdit_3->setDisabled(true);
         ui->pushButton_2->setDisabled(true);
     }
-    password = in.readAll();
+    password = str;
     qDebug()<<password;
 
 }
