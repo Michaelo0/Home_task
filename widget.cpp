@@ -52,6 +52,7 @@ void Widget::on_pushButton_clicked()
     form->show();
     QString pwd2 = ui->lineEdit->text();
 
+
 }
 
 void Widget::on_pushButton_2_clicked()
@@ -69,10 +70,8 @@ void Widget::on_pushButton_2_clicked()
         ui->lineEdit_2->clear();
         ui->lineEdit_3->clear();
         stream<<s;
-    QMessageBox::information(this,QString::fromStdString("Создание пароля"),QString::fromStdString("Пароль успешно создан"));
-ui->label->setDisabled(false);
-ui->lineEdit->setDisabled(false);
-ui->pushButton->setDisabled(false);
+    QMessageBox::information(this,QString::fromStdString("Создание пароля"),QString::fromStdString("Пароль успешно создан\n Перезапустите приложение"));
+
     }
     else
 QMessageBox::critical(this,QString::fromStdString("Ошибка"),QString::fromStdString("Пароли не совпадают"));
@@ -80,7 +79,7 @@ QMessageBox::critical(this,QString::fromStdString("Ошибка"),QString::fromS
     ui->lineEdit_3->clear();
 }
     file.flush();
-    file.close();
+
 }
 
 
