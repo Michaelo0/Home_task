@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QIODevice>
 #include <QDebug>
+#include <QTextStream>
 namespace Ui {
 class Form;
 }
@@ -26,6 +27,7 @@ private:
     Ui::Form *ui;
     QHash<QString,QString> hash;
     QHash<QString,QString>::iterator it=hash.begin();
+    void loadTextFile();
 
 };
 

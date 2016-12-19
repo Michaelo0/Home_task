@@ -25,4 +25,4 @@ FORMS    += widget.ui \
 DISTFILES +=
 
 RESOURCES += \
-    passwords.qrc
+    resource.qrc

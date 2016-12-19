@@ -8,6 +8,13 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    QFile file(":/masterpassword.txt");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+
+    password = in.readAll();
+qDebug()<<password;
+    file.close();
 
 }
 
@@ -18,7 +25,9 @@ Widget::~Widget()
 
 void Widget::on_pushButton_clicked()
 {
+
     QString pwd = ui->lineEdit->text();
+
     if(pwd != password) return;
     form = new Form();
     this->hide();
@@ -29,6 +38,9 @@ void Widget::on_pushButton_clicked()
 
 void Widget::on_pushButton_2_clicked()
 {
+    QFile file(":/masterpassword.txt");
+    file.open(QIODevice::WriteOnly);
+    QTextStream stream(&file);
     QString s=ui->lineEdit_2->text();
     QString s2=ui->lineEdit_3->text();
 
@@ -37,7 +49,7 @@ void Widget::on_pushButton_2_clicked()
 
         ui->lineEdit_2->clear();
         ui->lineEdit_3->clear();
-        password=s;
+        stream<<s;
     QMessageBox::information(this,QString::fromStdString("Создание пароля"),QString::fromStdString("Пароль успешно создан"));
 
     }
@@ -45,6 +57,7 @@ void Widget::on_pushButton_2_clicked()
 QMessageBox::critical(this,QString::fromStdString("Ошибка"),QString::fromStdString("Пароли не совпадают"));
     ui->lineEdit_2->clear();
     ui->lineEdit_3->clear();
+    file.close();
 }
 
 

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>passwords.txt</file>
+        <file>masterpassword.txt</file>
+    </qresource>
+</RCC>
