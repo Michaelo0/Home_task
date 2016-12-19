@@ -18,7 +18,7 @@ Form::~Form()
 
 void Form::loadPwdFromFile()
 {
-   // QHash<QString, QString> passwords_info;
+
     QFile file("passwords.txt");
     if(file.open(QIODevice::ReadOnly)){
     QTextStream in(&file);
@@ -27,7 +27,6 @@ void Form::loadPwdFromFile()
        foreach(QString raw_line, pwd_lines)
          {
              QStringList line = raw_line.split(" ", QString::SkipEmptyParts);
-             qDebug()<<line[0];
              passwords_info.insert(line[0], line[1]);
              ui->listWidget->addItem(line[0]);
          }

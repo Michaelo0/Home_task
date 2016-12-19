@@ -15,7 +15,7 @@ class Widget : public QWidget
 
 public:
     explicit Widget(QWidget *parent = 0);
-    void Widget::load_pwd_from_file();
+
     ~Widget();
 
 private slots:
