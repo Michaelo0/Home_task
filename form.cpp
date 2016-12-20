@@ -1,6 +1,7 @@
 #include "form.h"
 #include "ui_form.h"
 #include <QModelIndex>
+#include <QListWidgetItem>
 
 Form::Form(QWidget *parent) :
     QWidget(parent),
@@ -63,8 +64,8 @@ file.close();
 
 
 
-//void Form::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
-//{
-//    const QString& str=ui->listWidget->currentItem()->text();
-//    ui->label_5->setText(passwords_info[str]);
-//}
+void Form::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
+{
+    const QString& str=ui->listWidget->currentItem()->text();
+    ui->label_5->setText(passwords_info[str]);
+}
