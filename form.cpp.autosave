@@ -63,20 +63,6 @@ void Form::on_pushButton_clicked()
 
     file_writer(passwords_info);
 
-//    QFile  file("passwords.txt");
-
-//        QTextStream out(&file);
-
-//file.open(QIODevice::WriteOnly|QFile::Text);
-
-//QHashIterator<QString,QString>i(passwords_info);
-//        while(i.hasNext())
-//        {
-//            i.next();
-//            out<<i.value()<<" "<<i.key()<<endl;
-//        }
-//        file.flush();
-//        file.close();
 
     ui->lineEdit->clear();
     ui->lineEdit_2->clear();
