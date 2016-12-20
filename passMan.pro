@@ -24,5 +24,4 @@ FORMS    += widget.ui \
 
 DISTFILES +=
 
-RESOURCES += \
-    resource.qrc
+RESOURCES +=

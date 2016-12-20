@@ -26,7 +26,7 @@ private slots:
 
 
 
-    //void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+    void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::Form *ui;
