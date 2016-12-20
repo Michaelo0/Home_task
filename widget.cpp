@@ -83,3 +83,8 @@ QMessageBox::critical(this,QString::fromStdString("Ошибка"),QString::fromS
 }
 
 
+
+void Widget::on_pushButton_3_clicked()
+{
+    QMessageBox::information(this,QString::fromStdString("пароль"),password);
+}

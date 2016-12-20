@@ -7,6 +7,7 @@
 #include <QIODevice>
 #include <QDebug>
 #include <QTextStream>
+#include <QListWidgetItem>
 namespace Ui {
 class Form;
 }
@@ -27,6 +28,10 @@ private slots:
 
 
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_pushButton_2_clicked();
+
+    void file_writer(QHashIterator<QString,QString>);
 
 private:
     Ui::Form *ui;
